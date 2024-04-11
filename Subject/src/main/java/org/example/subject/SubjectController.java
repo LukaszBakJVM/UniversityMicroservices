@@ -2,6 +2,8 @@ package org.example.subject;
 
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/subject")
 public class SubjectController {
@@ -17,5 +19,9 @@ public class SubjectController {
     @GetMapping("/{id}")
     SubjectDto findById(@PathVariable long id){
         return services.findById(id);
+    }
+    @GetMapping()
+    List<SubjectDto>all(){
+        return services.findAllAndSortBySubject();
     }
 }

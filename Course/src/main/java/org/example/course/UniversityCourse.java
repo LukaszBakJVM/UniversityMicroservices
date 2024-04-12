@@ -11,7 +11,7 @@ public class UniversityCourse {
     private long id;
     private String course;
     @ElementCollection
-  private List<Long> subjectId;
+  private List<String> subjectId;
 
     public long getId() {
         return id;
@@ -29,11 +29,11 @@ public class UniversityCourse {
         this.course = course;
     }
 
-    public List<Long> getSubjectId() {
+    public List<String> getSubjectId() {
         return subjectId;
     }
 
-    public void setSubjectId(List<Long> subjectId) {
+    public void setSubjectId(List<String> subjectId) {
         this.subjectId = subjectId;
     }
 }

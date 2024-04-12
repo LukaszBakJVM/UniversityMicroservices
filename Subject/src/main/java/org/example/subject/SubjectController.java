@@ -16,9 +16,9 @@ public class SubjectController {
     SubjectDto newSubject(@RequestBody SubjectDto dto){
         return services.saveSubject(dto);
     }
-    @GetMapping("/{id}")
-    SubjectDto findById(@PathVariable long id){
-        return services.findById(id);
+    @GetMapping("/{subject}")
+    SubjectDto findBySubject(@PathVariable String subject){
+        return services.findById(subject);
     }
     @GetMapping()
     List<SubjectDto>all(){

@@ -6,10 +6,10 @@ import java.util.List;
 
 @Service
 public class CourseMapper {
-    UniversityCourse dtoToEntity(CourseDto dto, List<Long>list){
+    UniversityCourse dtoToEntity(CourseDto dto, List<String>list){
         UniversityCourse course = new UniversityCourse();
         course.setCourse(dto.course());
-        course.setSubjectId(dto.subjectId());
+        course.setSubjectId(list);
         return course;
     }
     CourseDto entityToDto(UniversityCourse course){

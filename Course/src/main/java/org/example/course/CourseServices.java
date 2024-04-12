@@ -26,11 +26,11 @@ public class CourseServices {
     }
 
 
-    private List<Long> listCourse(List<Long> course) {
-        List<Long> longListCourse = new ArrayList<>();
+    private List<String> listCourse(List<String> course) {
+        List<String> longListCourse = new ArrayList<>();
 
-        for (Long l : course) {
-            Long forObject = restTemplate.getForObject(COURSE_URL + l, Long.class);
+        for (String l : course) {
+            String forObject = restTemplate.getForObject(COURSE_URL + l, String.class);
             longListCourse.add(forObject);
         }
         return longListCourse;

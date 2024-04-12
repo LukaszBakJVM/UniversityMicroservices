@@ -8,7 +8,7 @@ import java.util.List;
 public interface SubjectRepository extends PagingAndSortingRepository<UniversitySubject, Long> {
     UniversitySubject save(UniversitySubject universitySubject);
 
-    UniversitySubject findById(long id);
+    UniversitySubject findBySubject(String subject);
 
     List<UniversitySubject> findAll(Sort sort);
 }

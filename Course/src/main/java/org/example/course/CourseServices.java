@@ -3,7 +3,6 @@ package org.example.course;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -27,12 +26,7 @@ public class CourseServices {
 
 
     private List<String> listCourse(List<String> course) {
-        List<String> longListCourse = new ArrayList<>();
-
-        for (String l : course) {
-            String forObject = restTemplate.getForObject(COURSE_URL + l, String.class);
-            longListCourse.add(forObject);
-        }
-        return longListCourse;
+        return course.stream().map(c -> restTemplate.getForObject(COURSE_URL + c, String.class)).toList();
     }
+
 }

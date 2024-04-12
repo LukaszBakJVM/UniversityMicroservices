@@ -22,7 +22,7 @@ public class CourseServices {
     CourseDto newCourse(CourseDto dto) {
         UniversityCourse course = courseMapper.dtoToEntity(dto, listCourse(dto.subjectId()));
         UniversityCourse save = repository.save(course);
-        return   courseMapper.entityToDto(save);
+        return courseMapper.entityToDto(save);
     }
 
 

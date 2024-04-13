@@ -1,10 +1,14 @@
 package org.example.course;
 
+import org.springframework.data.domain.Sort;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
 import java.util.List;
 
-public interface CourseRepository extends PagingAndSortingRepository<UniversityCourse,Long> {
+public interface CourseRepository extends PagingAndSortingRepository<UniversityCourse, Long> {
     UniversityCourse save(UniversityCourse course);
-    List<UniversityCourse>findAllById(long id);
+
+    List<UniversityCourse> findAllById(long id);
+
+    List<UniversityCourse> findAll(Sort sort);
 }

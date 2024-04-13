@@ -1,9 +1,8 @@
 package org.example.course;
 
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/course")
@@ -16,5 +15,9 @@ public class CourseController {
     @PostMapping
     CourseDto courseDto(@RequestBody CourseDto dto){
         return services.newCourse(dto);
+    }
+    @GetMapping("/{id}")
+    List<CourseDto>findById(@PathVariable long id){
+        return services.finaAllById(id);
     }
 }

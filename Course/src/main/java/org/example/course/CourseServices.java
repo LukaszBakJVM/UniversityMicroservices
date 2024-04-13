@@ -28,5 +28,8 @@ public class CourseServices {
     private List<String> listCourse(List<String> course) {
         return course.stream().map(c -> restTemplate.getForObject(COURSE_URL + c, String.class)).toList();
     }
+    List<CourseDto>finaAllById(long id){
+        return repository.findAllById(id).stream().map(courseMapper::entityToDto).toList();
+    }
 
 }

@@ -27,7 +27,7 @@ public class CourseServices {
 
 
     private List<String> listCourse(List<String> course) {
-        return course.stream().map(c -> restTemplate.getForObject(COURSE_URL + c, Subject.class)).map(Subject::subject).toList();
+        return course.stream().map(c -> restTemplate.getForObject(COURSE_URL + c, Subject.class)).map(subject -> subject != null ? subject.subject() : null).toList();
     }
     List<CourseDto>finaAllById(long id){
         return repository.findAllById(id).stream().map(courseMapper::entityToDto).toList();

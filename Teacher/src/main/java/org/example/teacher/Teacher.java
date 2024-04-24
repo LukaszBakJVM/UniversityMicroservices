@@ -1,12 +1,11 @@
 package org.example.teacher;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.Size;
+
+import java.util.List;
 
 
 @Entity
@@ -22,7 +21,8 @@ public class Teacher {
     private int age;
     @Email
     private String email;
-    private String subject;
+    @ElementCollection
+    private List<String> subjectName;
 
     public long getId() {
         return id;
@@ -64,12 +64,12 @@ public class Teacher {
         this.email = email;
     }
 
-    public String getSubject() {
-        return subject;
+    public List<String> getSubjectName() {
+        return subjectName;
     }
 
-    public void setSubject(String subject) {
-        this.subject = subject;
+    public void setSubjectName(List<String> subjectName) {
+        this.subjectName = subjectName;
     }
 }
 

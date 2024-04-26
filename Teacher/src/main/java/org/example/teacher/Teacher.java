@@ -13,13 +13,13 @@ public class Teacher {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @Size(min = 3)
+  //  @Size(min = 3)
     private String firstName;
-    @Size(min = 3)
+   // @Size(min = 3)
     private String lastName;
-    @Min(value = 18)
+  //  @Min(value = 18)
     private int age;
-    @Email
+   // @Email
     private String email;
     @ElementCollection
     private List<String> subjectName;

@@ -25,6 +25,8 @@ public class TeacherServices {
     }
 
 
+
+
     private List<String> listSubject(List<String> course) {
         return course.stream().map(c -> restTemplate.getForObject(SUBJECT_URL + c, Subject.class)).map(subject -> subject != null ? subject.subject() : null).toList();
     }

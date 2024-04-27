@@ -30,4 +30,12 @@ public class TeacherServices {
     private List<String> listSubject(List<String> course) {
         return course.stream().map(c -> restTemplate.getForObject(SUBJECT_URL + c, Subject.class)).map(subject -> subject != null ? subject.subject() : null).toList();
     }
+    List<TeacherDto>findAll(){
+        return teacherRepository.findAll().stream().map(teacherMapper::entityToDto).toList();
+    }
+    TeacherDto findById(long id){
+        Teacher teacher = teacherRepository.findById(id).orElseThrow();
+        return teacherMapper.entityToDto(teacher);
+
+    }
 }

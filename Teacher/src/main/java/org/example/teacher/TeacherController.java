@@ -1,12 +1,11 @@
 package org.example.teacher;
 
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
-@RequestMapping("/teacher3")
+@RequestMapping("/teacher")
 public class TeacherController {
     private final TeacherServices teacherServices;
 
@@ -16,8 +15,17 @@ public class TeacherController {
 
     @PostMapping()
     TeacherDto addTeacher(@RequestBody TeacherDto dto) {
-
         return teacherServices.newTeacher(dto);
-
     }
+
+    @GetMapping("/{id}")
+    TeacherDto findById(@PathVariable long id) {
+        return teacherServices.findById(id);
+    }
+
+    @GetMapping("all")
+    List<TeacherDto> all() {
+        return teacherServices.findAll();
+    }
+
 }

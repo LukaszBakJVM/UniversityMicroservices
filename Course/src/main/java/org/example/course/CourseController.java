@@ -19,9 +19,15 @@ public class CourseController {
     }
 
     @GetMapping("/{id}")
-    List<CourseDto> findById(@PathVariable long id) {
-        return services.finaAllById(id);
+    CourseDto findById(@PathVariable long id) {
+        return services.findById(id);
     }
+
+    @GetMapping("/{name}")
+    CourseDto findByName(@PathVariable String name){
+        return services.findByCourse(name);
+    }
+
 
     @GetMapping
     List<CourseDto> finaAll() {

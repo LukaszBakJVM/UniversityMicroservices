@@ -4,13 +4,13 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class StudentMapper {
-    Student dtoToEntity(StudentDto dto) {
+    Student dtoToEntity(StudentDto dto,String courseName) {
         Student student = new Student();
         student.setFirstName(dto.firstName());
         student.setLastName(dto.lastName());
         student.setAge(dto.age());
         student.setEmail(dto.email());
-        student.setCourse(dto.course());
+        student.setCourse(courseName);
         return student;
     }
 

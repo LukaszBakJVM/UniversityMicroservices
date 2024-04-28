@@ -28,13 +28,20 @@ public class CourseServices {
 
     private List<String> listCourse(List<String> course) {
         return course.stream().map(c -> restTemplate.getForObject(COURSE_URL + c, Subject.class)).map(subject -> subject != null ? subject.subject() : null).toList();
-    }
-    List<CourseDto>finaAllById(long id){
-        return repository.findAllById(id).stream().map(courseMapper::entityToDto).toList();
+
+
     }
     List<CourseDto>finaAll(){
         Sort subject = Sort.by(Sort.Direction.ASC, "course");
         return repository.findAll(subject).stream().map(courseMapper::entityToDto).toList();
+    }
+    CourseDto findById(long id){
+        UniversityCourse course = repository.findById(id).orElseThrow();
+        return courseMapper.entityToDto(course);
+    }
+    CourseDto findByCourse(String course){
+        UniversityCourse courseName = repository.findByCourse(course).orElseThrow();
+        return courseMapper.entityToDto(courseName);
     }
 
 }

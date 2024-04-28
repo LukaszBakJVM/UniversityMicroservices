@@ -23,7 +23,7 @@ public class CourseController {
         return services.findById(id);
     }
 
-    @GetMapping("/{name}")
+    @GetMapping("/name/{name}")
     CourseDto findByName(@PathVariable String name){
         return services.findByCourse(name);
     }

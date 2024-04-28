@@ -7,7 +7,7 @@ import org.springframework.web.client.RestTemplate;
 
 @Service
 public class StudentService {
-    private final String COURSE_URL = "http://Course//course/";
+    private final String COURSE_URL = "http://Course//course/name/";
     private final StudentRepository studentRepository;
     private final StudentMapper studentMapper;
     private final RestTemplate restTemplate;
@@ -20,7 +20,7 @@ public class StudentService {
     StudentDto addStudent(StudentDto dto){
         Student student = studentMapper.dtoToEntity(dto, course(dto.course()));
         Student save = studentRepository.save(student);
-        return studentMapper.entityToDto(student);
+        return studentMapper.entityToDto(save);
 
 
     }

@@ -1,9 +1,6 @@
 package org.example.student;
 
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/student")
@@ -16,5 +13,9 @@ public class StudentController {
     @PostMapping
     StudentDto save(@RequestBody StudentDto dto){
         return studentService.addStudent(dto);
+    }
+    @GetMapping
+    String findStudent(@RequestParam String firstname , @RequestParam String lastname){
+        return studentService.findByFirstnameAndLastname(firstname,lastname);
     }
 }

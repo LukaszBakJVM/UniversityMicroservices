@@ -7,7 +7,7 @@ import org.springframework.web.client.RestTemplate;
 
 @Service
 public class StudentService {
-    private final String COURSE_URL = "http://Course//course/name/";
+    private final String COURSE_URL = "http://Course//course/";
     private final StudentRepository studentRepository;
     private final StudentMapper studentMapper;
     private final RestTemplate restTemplate;
@@ -25,7 +25,10 @@ public class StudentService {
 
     }
     private String course(String course) {
-     return    restTemplate.getForObject(COURSE_URL + course, Course.class).course();
+     return    restTemplate.getForObject(COURSE_URL +"name/"+ course, Course.class).course();
+    }
+    String findByFirstnameAndLastname(String firstName,String lastName){
+     return    studentRepository.findByFirstNameAndLastName(firstName, lastName).map(Student::getCourse).orElseThrow();
 
-}
+    }
 }

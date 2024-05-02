@@ -27,5 +27,9 @@ public class TeacherController {
     List<TeacherDto> all() {
         return teacherServices.findAll();
     }
+    @GetMapping("/subject/{subject}")
+    TeacherDto bySubject(@PathVariable String subject){
+        return teacherServices.findTeacherBySubject(subject);
+    }
 
 }

@@ -38,4 +38,7 @@ public class TeacherServices {
         return teacherMapper.entityToDto(teacher);
 
     }
+    TeacherDto findTeacherBySubject(String subject){
+      return   teacherRepository.findTeachersBySubjectName(subject).map(teacherMapper::entityToDto).orElseThrow();
+    }
 }

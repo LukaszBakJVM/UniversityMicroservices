@@ -2,6 +2,8 @@ package org.example.student;
 
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Set;
+
 @RestController
 @RequestMapping("/student")
 public class StudentController {
@@ -10,12 +12,19 @@ public class StudentController {
     public StudentController(StudentService studentService) {
         this.studentService = studentService;
     }
+
     @PostMapping
-    StudentDto save(@RequestBody StudentDto dto){
+    StudentDto save(@RequestBody StudentDto dto) {
         return studentService.addStudent(dto);
     }
+
     @GetMapping
-    String findStudent(@RequestParam String firstname , @RequestParam String lastname){
-        return studentService.findByFirstnameAndLastname(firstname,lastname);
+    String findStudent(@RequestParam String firstname, @RequestParam String lastname) {
+        return studentService.findByFirstnameAndLastname(firstname, lastname);
+    }
+
+    @GetMapping("/teacher")
+    Set<Teacher> findTeachersByStudent(@RequestParam String firstname, @RequestParam String lastname) {
+        return studentService.findTeachersByStudent(firstname, lastname);
     }
 }

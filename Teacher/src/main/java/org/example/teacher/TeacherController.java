@@ -33,7 +33,7 @@ public class TeacherController {
         return teacherServices.findTeacherBySubject(subject);
     }
     @GetMapping("/student")
-    Set<Student>findStudentByTeacher(@RequestParam String firstname,@RequestParam  String lastname){
+    Set<StudentsList>findStudentByTeacher(@RequestParam String firstname,@RequestParam  String lastname){
         return teacherServices.findStudentByTeacher(firstname,lastname);
     }
 

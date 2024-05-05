@@ -2,7 +2,6 @@ package org.example.student;
 
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Set;
 
 @RestController
@@ -28,8 +27,9 @@ public class StudentController {
     Set<Teacher> findTeachersByStudent(@RequestParam String firstname, @RequestParam String lastname) {
         return studentService.findTeachersByStudent(firstname, lastname);
     }
+
     @GetMapping("/course/{course}")
-    List<StudentDto>findStudentsByCourse(@PathVariable String course){
+    FindStudentByCourse findStudentsByCourse(@PathVariable String course) {
         return studentService.findStudentByCourse(course);
     }
 }

@@ -24,7 +24,7 @@ public class CourseController {
     }
 
     @GetMapping("/name/{name}")
-    CourseDto findByName(@PathVariable String name){
+    CourseDto findByName(@PathVariable String name) {
         return services.findByCourse(name);
     }
 
@@ -33,8 +33,9 @@ public class CourseController {
     List<CourseDto> finaAll() {
         return services.finaAll();
     }
+
     @GetMapping("/subject/{name}")
-    FindStudentByTeacher findCourseBySubjectName(@PathVariable String name){
+    FindStudentByTeacher findCourseBySubjectName(@PathVariable String name) {
         return services.findBySubject(name);
     }
 }

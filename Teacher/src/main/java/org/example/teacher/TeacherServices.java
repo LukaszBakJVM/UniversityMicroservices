@@ -10,8 +10,6 @@ import java.util.Set;
 @Service
 public class TeacherServices {
     private final String SUBJECT_URL = "http://Subject/subject/";
-    private final String COURSE_URL = "http://Course//course/subject/";
-    private final String STUDENT_URL = "http://Student//student/course/";
     private final RestTemplate restTemplate;
     private final TeacherRepository teacherRepository;
     private final TeacherMapper teacherMapper;
@@ -47,18 +45,20 @@ public class TeacherServices {
         return teacherRepository.findTeachersBySubjectName(subject).map(teacherMapper::entityToDto).orElseThrow();
     }
 
-    Set<Student> findStudentByTeacher(String firstName, String lastName) {
-        Set<Student> students = new HashSet<>();
+    Set<StudentsList> findStudentByTeacher(String firstName, String lastName) {
+        Set<StudentsList> students = new HashSet<>();
         Set<String> course = new HashSet<>();
         List<String> strings = teacherRepository.findTeachersByFirstNameAndLastName(firstName, lastName).map(Teacher::getSubjectName).orElseThrow();
         for (String s : strings) {
+            String COURSE_URL = "http://Course//course/subject/";
             List<String> course1 = restTemplate.getForObject(COURSE_URL + s, Course.class).course();
 
-              course.addAll(course1);
+            course.addAll(course1);
         }
         for (String s : course) {
 
-            Student student = restTemplate.getForObject(STUDENT_URL + s, Student.class);
+            String STUDENT_URL = "http://Student//student/course/";
+            StudentsList student = restTemplate.getForObject(STUDENT_URL + s, StudentsList.class);
             students.add(student);
         }
         return students;

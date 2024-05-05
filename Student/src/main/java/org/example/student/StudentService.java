@@ -52,8 +52,12 @@ public class StudentService {
         return teachers;
     }
 
-    List<StudentDto>findStudentByCourse(String course){
-        return studentRepository.findByCourse(course).stream().map(studentMapper::entityToDto).toList();
+
+    FindStudentByCourse findStudentByCourse(String course) {
+        List<Student> byCourse = studentRepository.findByCourse(course);
+        return studentMapper.findStudentByCourse(byCourse);
+
+
     }
 
 }

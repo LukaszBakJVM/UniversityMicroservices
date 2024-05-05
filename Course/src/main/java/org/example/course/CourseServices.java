@@ -31,17 +31,25 @@ public class CourseServices {
 
 
     }
-    List<CourseDto>finaAll(){
+
+    List<CourseDto> finaAll() {
         Sort subject = Sort.by(Sort.Direction.ASC, "course");
         return repository.findAll(subject).stream().map(courseMapper::entityToDto).toList();
     }
-    CourseDto findById(long id){
+
+    CourseDto findById(long id) {
         UniversityCourse course = repository.findById(id).orElseThrow();
         return courseMapper.entityToDto(course);
     }
-    CourseDto findByCourse(String course){
+
+    CourseDto findByCourse(String course) {
         UniversityCourse courseName = repository.findByCourse(course).orElseThrow();
         return courseMapper.entityToDto(courseName);
     }
 
+    FindStudentByTeacher findBySubject(String subject) {
+        List<UniversityCourse> bySubjectName = repository.findBySubjectName(subject);
+        return courseMapper.findStudentByTeacherDto(bySubjectName);
+
+    }
 }

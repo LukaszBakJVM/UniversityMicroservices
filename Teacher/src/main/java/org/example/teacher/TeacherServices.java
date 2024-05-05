@@ -3,11 +3,15 @@ package org.example.teacher;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class TeacherServices {
     private final String SUBJECT_URL = "http://Subject/subject/";
+    private final String COURSE_URL = "http://Course//course/subject/";
+    private final String STUDENT_URL = "http://Student//student/course/";
     private final RestTemplate restTemplate;
     private final TeacherRepository teacherRepository;
     private final TeacherMapper teacherMapper;
@@ -18,27 +22,45 @@ public class TeacherServices {
         this.teacherMapper = teacherMapper;
     }
 
-    TeacherDto newTeacher(TeacherDto dto){
+    TeacherDto newTeacher(TeacherDto dto) {
         Teacher teacher = teacherMapper.dtoToEntity(dto, listSubject(dto.subject()));
         Teacher save = teacherRepository.save(teacher);
         return teacherMapper.entityToDto(save);
     }
 
 
-
-
     private List<String> listSubject(List<String> course) {
         return course.stream().map(c -> restTemplate.getForObject(SUBJECT_URL + c, Subject.class)).map(subject -> subject != null ? subject.subject() : null).toList();
     }
-    List<TeacherDto>findAll(){
+
+    List<TeacherDto> findAll() {
         return teacherRepository.findAll().stream().map(teacherMapper::entityToDto).toList();
     }
-    TeacherDto findById(long id){
+
+    TeacherDto findById(long id) {
         Teacher teacher = teacherRepository.findById(id).orElseThrow();
         return teacherMapper.entityToDto(teacher);
 
     }
-    TeacherDto findTeacherBySubject(String subject){
-      return   teacherRepository.findTeachersBySubjectName(subject).map(teacherMapper::entityToDto).orElseThrow();
+
+    TeacherDto findTeacherBySubject(String subject) {
+        return teacherRepository.findTeachersBySubjectName(subject).map(teacherMapper::entityToDto).orElseThrow();
+    }
+
+    Set<Student> findStudentByTeacher(String firstName, String lastName) {
+        Set<Student> students = new HashSet<>();
+        Set<String> course = new HashSet<>();
+        List<String> strings = teacherRepository.findTeachersByFirstNameAndLastName(firstName, lastName).map(Teacher::getSubjectName).orElseThrow();
+        for (String s : strings) {
+            List<String> course1 = restTemplate.getForObject(COURSE_URL + s, Course.class).course();
+
+              course.addAll(course1);
+        }
+        for (String s : course) {
+
+            Student student = restTemplate.getForObject(STUDENT_URL + s, Student.class);
+            students.add(student);
+        }
+        return students;
     }
 }

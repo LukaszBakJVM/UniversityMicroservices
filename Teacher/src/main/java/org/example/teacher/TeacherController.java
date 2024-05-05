@@ -3,6 +3,7 @@ package org.example.teacher;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/teacher")
@@ -31,5 +32,10 @@ public class TeacherController {
     TeacherDto bySubject(@PathVariable String subject){
         return teacherServices.findTeacherBySubject(subject);
     }
+    @GetMapping("/student")
+    Set<Student>findStudentByTeacher(@RequestParam String firstname,@RequestParam  String lastname){
+        return teacherServices.findStudentByTeacher(firstname,lastname);
+    }
+
 
 }

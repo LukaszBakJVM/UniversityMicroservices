@@ -16,4 +16,11 @@ public class CourseMapper {
     CourseDto entityToDto(UniversityCourse course) {
         return new CourseDto(course.getCourse(), course.getSubjectName());
     }
+
+    FindStudentByTeacher findStudentByTeacherDto(List<UniversityCourse> universityCourses) {
+        List<String> list = universityCourses.stream().map(UniversityCourse::getCourse).toList();
+        return new FindStudentByTeacher(list);
+    }
+
+
 }

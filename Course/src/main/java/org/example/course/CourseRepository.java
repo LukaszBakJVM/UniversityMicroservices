@@ -13,4 +13,6 @@ public interface CourseRepository extends PagingAndSortingRepository<UniversityC
    Optional<UniversityCourse>findByCourse(String course);
 
     List<UniversityCourse> findAll(Sort sort);
+    List<UniversityCourse>findBySubjectName(String subjectName);
+
 }

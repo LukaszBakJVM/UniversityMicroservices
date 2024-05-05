@@ -8,4 +8,5 @@ public interface TeacherRepository extends JpaRepository<Teacher, Long> {
 
     Optional<Teacher> findById(long id);
     Optional<Teacher>findTeachersBySubjectName(String subject);
+    Optional<Teacher>findTeachersByFirstNameAndLastName(String firstName, String lastName);
 }

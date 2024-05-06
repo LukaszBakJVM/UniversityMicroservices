@@ -14,7 +14,6 @@ public class StudentService {
     private final String COURSE_URL = "http://Course//course/";
     private final StudentRepository studentRepository;
     private final StudentMapper studentMapper;
-
     private final WebClient.Builder webClientBuilder;
 
 
@@ -49,7 +48,7 @@ public class StudentService {
 
         String curseName = findByFirstnameAndLastname(firstName, lastName);
 
-        return webClientBuilder.baseUrl(COURSE_URL).build().get().uri("name/{curseName}", curseName).retrieve().bodyToMono(Subject.class).map(Subject::subject).flatMapMany(Flux::fromIterable).flatMap(subject -> webClientBuilder.baseUrl(TEACHER_URL).build().get().uri("{subject}", subject).retrieve().bodyToMono(Teacher.class)).collectList();
+        return webClientBuilder.baseUrl(COURSE_URL).build().get().uri("name/{curseName}", curseName).retrieve().bodyToMono(Subject.class).map(Subject::subject).flatMapMany(Flux::fromIterable).flatMap(subject -> webClientBuilder.baseUrl(TEACHER_URL).build().get().uri("{subject}", subject).retrieve().bodyToMono(Teacher.class)).distinct().collectList();
 
     }
 

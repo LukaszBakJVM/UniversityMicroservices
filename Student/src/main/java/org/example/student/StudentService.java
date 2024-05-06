@@ -1,5 +1,6 @@
 package org.example.student;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.client.loadbalancer.reactive.ReactorLoadBalancerExchangeFilterFunction;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -11,7 +12,10 @@ import java.util.List;
 
 @Service
 public class StudentService {
-    private final String COURSE_URL = "http://Course//course/";
+    @Value("${course}")
+    private  String courseUrl;
+    @Value("${teacher}")
+    private   String teacherUrl;
     private final StudentRepository studentRepository;
     private final StudentMapper studentMapper;
     private final WebClient.Builder webClientBuilder;
@@ -33,7 +37,7 @@ public class StudentService {
 
     private String course(String course) {
 
-        return webClientBuilder.baseUrl(COURSE_URL).build().get().uri("name/{course}", course).retrieve().bodyToMono(Course.class).map(Course::course).flux().blockFirst();
+        return webClientBuilder.baseUrl(courseUrl).build().get().uri("name/{course}", course).retrieve().bodyToMono(Course.class).map(Course::course).flux().blockFirst();
 
 
     }
@@ -44,11 +48,11 @@ public class StudentService {
     }
 
     Mono<List<Teacher>> findTeachersByStudent(String firstName, String lastName) {
-        String TEACHER_URL = "http://Teacher//teacher/subject/";
+
 
         String curseName = findByFirstnameAndLastname(firstName, lastName);
 
-        return webClientBuilder.baseUrl(COURSE_URL).build().get().uri("name/{curseName}", curseName).retrieve().bodyToMono(Subject.class).map(Subject::subject).flatMapMany(Flux::fromIterable).flatMap(subject -> webClientBuilder.baseUrl(TEACHER_URL).build().get().uri("{subject}", subject).retrieve().bodyToMono(Teacher.class)).distinct().collectList();
+        return webClientBuilder.baseUrl(courseUrl).build().get().uri("name/{curseName}", curseName).retrieve().bodyToMono(Subject.class).map(Subject::subject).flatMapMany(Flux::fromIterable).flatMap(subject -> webClientBuilder.baseUrl(teacherUrl).build().get().uri("{subject}", subject).retrieve().bodyToMono(Teacher.class)).distinct().collectList();
 
     }
 

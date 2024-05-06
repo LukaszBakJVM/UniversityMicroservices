@@ -1,8 +1,9 @@
 package org.example.student;
 
 import org.springframework.web.bind.annotation.*;
+import reactor.core.publisher.Mono;
 
-import java.util.Set;
+import java.util.List;
 
 @RestController
 @RequestMapping("/student")
@@ -24,7 +25,7 @@ public class StudentController {
     }
 
     @GetMapping("/teacher")
-    Set<Teacher> findTeachersByStudent(@RequestParam String firstname, @RequestParam String lastname) {
+    Mono<List<Teacher>> findTeachersByStudent(@RequestParam String firstname, @RequestParam String lastname) {
         return studentService.findTeachersByStudent(firstname, lastname);
     }
 

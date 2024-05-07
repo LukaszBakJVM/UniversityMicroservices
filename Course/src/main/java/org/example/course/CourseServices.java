@@ -1,22 +1,26 @@
 package org.example.course;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.client.loadbalancer.reactive.ReactorLoadBalancerExchangeFilterFunction;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.web.reactive.function.client.WebClient;
 
 import java.util.List;
 
 @Service
 public class CourseServices {
-    private final String COURSE_URL = "http://Subject/subject/";
+
     private final CourseRepository repository;
     private final CourseMapper courseMapper;
-    private final RestTemplate restTemplate;
+    private final WebClient.Builder webClientBuilder;
+    @Value("${course}")
+    private String courseUrl;
 
-    public CourseServices(CourseRepository repository, CourseMapper courseMapper, RestTemplate restTemplate) {
+    public CourseServices(CourseRepository repository, CourseMapper courseMapper, WebClient.Builder webClientBuilder, ReactorLoadBalancerExchangeFilterFunction lbFunction) {
         this.repository = repository;
         this.courseMapper = courseMapper;
-        this.restTemplate = restTemplate;
+        this.webClientBuilder = webClientBuilder.filter(lbFunction);
     }
 
     CourseDto newCourse(CourseDto dto) {
@@ -27,9 +31,9 @@ public class CourseServices {
 
 
     private List<String> listCourse(List<String> course) {
-        return course.stream().map(c -> restTemplate.getForObject(COURSE_URL + c, Subject.class)).map(subject -> subject != null ? subject.subject() : null).toList();
-
-
+        return course.stream()
+                .map(c -> webClientBuilder.baseUrl(courseUrl).build().get().uri(c).retrieve().bodyToMono(Subject.class).map(Subject::subject).block())
+                .toList();
     }
 
     List<CourseDto> finaAll() {

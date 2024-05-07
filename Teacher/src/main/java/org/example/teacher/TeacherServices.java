@@ -1,23 +1,33 @@
 package org.example.teacher;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.client.loadbalancer.reactive.ReactorLoadBalancerExchangeFilterFunction;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class TeacherServices {
-    private final String SUBJECT_URL = "http://Subject/subject/";
-    private final RestTemplate restTemplate;
     private final TeacherRepository teacherRepository;
     private final TeacherMapper teacherMapper;
+    private final WebClient.Builder webClientBuilder;
+    @Value("${subject}")
+    private String subjectUrl;
+    @Value("${course}")
+    private String courseUrl;
+    @Value("${student}")
+    private String studentUrl;
 
-    public TeacherServices(RestTemplate restTemplate, TeacherRepository teacherRepository, TeacherMapper teacherMapper) {
-        this.restTemplate = restTemplate;
+    public TeacherServices(TeacherRepository teacherRepository, TeacherMapper teacherMapper, WebClient.Builder webClientBuilder, ReactorLoadBalancerExchangeFilterFunction lbFunction) {
+
         this.teacherRepository = teacherRepository;
         this.teacherMapper = teacherMapper;
+        this.webClientBuilder = webClientBuilder.filter(lbFunction);
     }
 
     TeacherDto newTeacher(TeacherDto dto) {
@@ -28,7 +38,8 @@ public class TeacherServices {
 
 
     private List<String> listSubject(List<String> course) {
-        return course.stream().map(c -> restTemplate.getForObject(SUBJECT_URL + c, Subject.class)).map(subject -> subject != null ? subject.subject() : null).toList();
+        return course.stream().map(c -> webClientBuilder.baseUrl(subjectUrl).build().get().uri(c).retrieve().bodyToMono(Subject.class).map(Subject::subject).block()).toList();
+
     }
 
     List<TeacherDto> findAll() {
@@ -45,22 +56,10 @@ public class TeacherServices {
         return teacherRepository.findTeachersBySubjectName(subject).map(teacherMapper::entityToDto).orElseThrow();
     }
 
-    Set<StudentsList> findStudentByTeacher(String firstName, String lastName) {
-        Set<StudentsList> students = new HashSet<>();
-        Set<String> course = new HashSet<>();
-        List<String> strings = teacherRepository.findTeachersByFirstNameAndLastName(firstName, lastName).map(Teacher::getSubjectName).orElseThrow();
-        for (String s : strings) {
-            String COURSE_URL = "http://Course//course/subject/";
-            List<String> course1 = restTemplate.getForObject(COURSE_URL + s, Course.class).course();
-
-            course.addAll(course1);
-        }
-        for (String s : course) {
-
-            String STUDENT_URL = "http://Student//student/course/";
-            StudentsList student = restTemplate.getForObject(STUDENT_URL + s, StudentsList.class);
-            students.add(student);
-        }
-        return students;
+    Mono<List<StudentsList>> findStudentByTeacher(String firstName, String lastName) {
+        Mono<Set<String>> coursesMono = teacherRepository.findTeachersByFirstNameAndLastName(firstName, lastName).map(Teacher::getSubjectName).map(subjectNames -> Flux.fromIterable(subjectNames).flatMap(subject -> webClientBuilder.build().get().uri(courseUrl + subject).retrieve().bodyToMono(Course.class)).flatMap(c -> Flux.fromIterable(c.course())).collect(Collectors.toSet())).orElseThrow();
+        Flux<String> coursesFlux = coursesMono.flatMapMany(Flux::fromIterable);
+        Flux<StudentsList> studentsFlux = coursesFlux.flatMap(c -> webClientBuilder.build().get().uri(studentUrl + c).retrieve().bodyToMono(StudentsList.class));
+        return studentsFlux.collectList();
     }
 }

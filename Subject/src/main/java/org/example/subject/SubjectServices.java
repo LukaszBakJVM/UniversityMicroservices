@@ -21,7 +21,7 @@ public class SubjectServices {
         return subjectMapper.entityToDto(save);
     }
 
-    SubjectDto findById(String subject) {
+    SubjectDto findBySubject(String subject) {
         UniversitySubject bySubject = subjectRepository.findBySubject(subject);
         return subjectMapper.entityToDto(bySubject);
     }

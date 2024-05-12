@@ -1,0 +1,20 @@
+{
+  "id" : "30643fbe-cb2d-4234-998b-95f13ef87e7e",
+  "name" : "subject_chemia",
+  "request" : {
+    "url" : "/subject/Chemia",
+    "method" : "GET"
+  },
+  "response" : {
+    "status" : 200,
+    "body" : "{\"subject\":\"Chemia\"}",
+    "headers" : {
+      "Keep-Alive" : "timeout=60",
+      "Date" : "Sun, 12 May 2024 07:21:43 GMT",
+      "Content-Type" : "application/json"
+    }
+  },
+  "uuid" : "30643fbe-cb2d-4234-998b-95f13ef87e7e",
+  "persistent" : true,
+  "insertionIndex" : 3
+}

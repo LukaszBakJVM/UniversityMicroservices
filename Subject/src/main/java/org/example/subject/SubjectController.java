@@ -18,7 +18,7 @@ public class SubjectController {
     }
     @GetMapping("/{subject}")
     SubjectDto findBySubject(@PathVariable String subject){
-        return services.findById(subject);
+        return services.findBySubject(subject);
     }
     @GetMapping()
     List<SubjectDto>all(){

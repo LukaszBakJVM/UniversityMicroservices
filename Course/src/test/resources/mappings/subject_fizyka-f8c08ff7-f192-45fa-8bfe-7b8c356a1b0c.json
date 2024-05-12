@@ -1,0 +1,20 @@
+{
+  "id" : "f8c08ff7-f192-45fa-8bfe-7b8c356a1b0c",
+  "name" : "subject_fizyka",
+  "request" : {
+    "url" : "/subject/Fizyka",
+    "method" : "GET"
+  },
+  "response" : {
+    "status" : 200,
+    "body" : "{\"subject\":\"Fizyka\"}",
+    "headers" : {
+      "Keep-Alive" : "timeout=60",
+      "Date" : "Sun, 12 May 2024 07:21:26 GMT",
+      "Content-Type" : "application/json"
+    }
+  },
+  "uuid" : "f8c08ff7-f192-45fa-8bfe-7b8c356a1b0c",
+  "persistent" : true,
+  "insertionIndex" : 4
+}

@@ -30,8 +30,8 @@ public class CourseServices {
     }
 
 
-    private List<String> listCourse(List<String> course) {
-        return course.stream()
+    private List<String> listCourse(List<String> subject) {
+        return subject.stream()
                 .map(c -> webClientBuilder.baseUrl(courseUrl).build().get().uri(c).retrieve().bodyToMono(Subject.class).map(Subject::subject).block())
                 .toList();
     }

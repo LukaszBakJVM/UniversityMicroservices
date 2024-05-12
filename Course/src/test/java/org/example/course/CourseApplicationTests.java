@@ -19,7 +19,7 @@ class CourseApplicationTests {
     @LocalServerPort
     private static int dynamicPort;
     @RegisterExtension
-    static WireMockExtension wireMockServer = WireMockExtension.newInstance().options(wireMockConfig().port(dynamicPort)).build();
+    static WireMockExtension wireMockServer = WireMockExtension.newInstance().options(wireMockConfig().port(57243)).build();
     @Autowired
     WebTestClient webTestClient;
 
@@ -33,12 +33,12 @@ class CourseApplicationTests {
     void contextLoads() {
     }
 
-    @Test
+ /*   @Test
     void recordWiremock() throws InterruptedException {
         System.out.println(wireMockServer.getPort());
         while (true) {
             Thread.sleep(4000);
         }
 
-    }
+    }*/
 }

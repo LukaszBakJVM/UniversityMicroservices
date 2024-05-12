@@ -1,0 +1,20 @@
+{
+  "id" : "7fe7b5c0-ec7e-493b-b63e-e6041a8c30e1",
+  "name" : "teacher_subject_jezyk-polski",
+  "request" : {
+    "url" : "/teacher/subject/Jezyk%20Polski",
+    "method" : "GET"
+  },
+  "response" : {
+    "status" : 200,
+    "body" : "{\"firstName\":\"RobertSenior\",\"lastName\":\"Bąk\",\"age\":19,\"email\":\"robert@wp.pl\",\"subject\":[\"Jezyk Polski\",\"Jezyka Angielski\"]}",
+    "headers" : {
+      "Keep-Alive" : "timeout=60",
+      "Date" : "Sun, 12 May 2024 09:47:01 GMT",
+      "Content-Type" : "application/json"
+    }
+  },
+  "uuid" : "7fe7b5c0-ec7e-493b-b63e-e6041a8c30e1",
+  "persistent" : true,
+  "insertionIndex" : 12
+}

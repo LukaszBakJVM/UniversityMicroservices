@@ -1,0 +1,20 @@
+{
+  "id" : "eb310943-d4e1-46b5-a146-bd066bfa59b6",
+  "name" : "student_course_informatyczny",
+  "request" : {
+    "url" : "/student/course/Informatyczny",
+    "method" : "GET"
+  },
+  "response" : {
+    "status" : 200,
+    "body" : "{\"students\":[{\"firstname\":\"Robert\",\"lastname\":\"Bąk\"}]}",
+    "headers" : {
+      "Keep-Alive" : "timeout=60",
+      "Date" : "Sun, 12 May 2024 10:12:43 GMT",
+      "Content-Type" : "application/json"
+    }
+  },
+  "uuid" : "eb310943-d4e1-46b5-a146-bd066bfa59b6",
+  "persistent" : true,
+  "insertionIndex" : 27
+}

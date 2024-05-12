@@ -19,7 +19,7 @@ class CourseApplicationTests {
     @LocalServerPort
     private static int dynamicPort;
     @RegisterExtension
-    static WireMockExtension wireMockServer = WireMockExtension.newInstance().options(wireMockConfig().port(57243)).build();
+    static WireMockExtension wireMockServer = WireMockExtension.newInstance().options(wireMockConfig().port(dynamicPort)).build();
     @Autowired
     WebTestClient webTestClient;
 

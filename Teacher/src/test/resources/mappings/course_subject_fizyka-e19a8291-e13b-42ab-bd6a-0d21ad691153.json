@@ -1,0 +1,20 @@
+{
+  "id" : "e19a8291-e13b-42ab-bd6a-0d21ad691153",
+  "name" : "course_subject_fizyka",
+  "request" : {
+    "url" : "/course/subject/Fizyka",
+    "method" : "GET"
+  },
+  "response" : {
+    "status" : 200,
+    "body" : "{\"course\":[\"Fiz-Chem\"]}",
+    "headers" : {
+      "Keep-Alive" : "timeout=60",
+      "Date" : "Sun, 12 May 2024 10:04:53 GMT",
+      "Content-Type" : "application/json"
+    }
+  },
+  "uuid" : "e19a8291-e13b-42ab-bd6a-0d21ad691153",
+  "persistent" : true,
+  "insertionIndex" : 20
+}

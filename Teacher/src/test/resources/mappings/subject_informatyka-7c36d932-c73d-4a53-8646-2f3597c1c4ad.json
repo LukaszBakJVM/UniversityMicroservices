@@ -1,0 +1,20 @@
+{
+  "id" : "7c36d932-c73d-4a53-8646-2f3597c1c4ad",
+  "name" : "subject_informatyka",
+  "request" : {
+    "url" : "/subject/Informatyka",
+    "method" : "GET"
+  },
+  "response" : {
+    "status" : 200,
+    "body" : "{\"subject\":\"Informatyka\"}",
+    "headers" : {
+      "Keep-Alive" : "timeout=60",
+      "Date" : "Sun, 12 May 2024 09:56:26 GMT",
+      "Content-Type" : "application/json"
+    }
+  },
+  "uuid" : "7c36d932-c73d-4a53-8646-2f3597c1c4ad",
+  "persistent" : true,
+  "insertionIndex" : 1
+}

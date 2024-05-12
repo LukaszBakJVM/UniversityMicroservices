@@ -1,0 +1,20 @@
+{
+  "id" : "9bd1a191-bae8-4702-8579-a626ef1a9fb5",
+  "name" : "student_course_fiz-chem",
+  "request" : {
+    "url" : "/student/course/Fiz-Chem",
+    "method" : "GET"
+  },
+  "response" : {
+    "status" : 200,
+    "body" : "{\"students\":[{\"firstname\":\"Łukasz\",\"lastname\":\"Bąk\"}]}",
+    "headers" : {
+      "Keep-Alive" : "timeout=60",
+      "Date" : "Sun, 12 May 2024 10:12:16 GMT",
+      "Content-Type" : "application/json"
+    }
+  },
+  "uuid" : "9bd1a191-bae8-4702-8579-a626ef1a9fb5",
+  "persistent" : true,
+  "insertionIndex" : 29
+}

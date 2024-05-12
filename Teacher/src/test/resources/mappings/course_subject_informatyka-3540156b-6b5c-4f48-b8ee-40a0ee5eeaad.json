@@ -1,0 +1,20 @@
+{
+  "id" : "3540156b-6b5c-4f48-b8ee-40a0ee5eeaad",
+  "name" : "course_subject_informatyka",
+  "request" : {
+    "url" : "/course/subject/Informatyka",
+    "method" : "GET"
+  },
+  "response" : {
+    "status" : 200,
+    "body" : "{\"course\":[\"Informatyczny\"]}",
+    "headers" : {
+      "Keep-Alive" : "timeout=60",
+      "Date" : "Sun, 12 May 2024 10:05:24 GMT",
+      "Content-Type" : "application/json"
+    }
+  },
+  "uuid" : "3540156b-6b5c-4f48-b8ee-40a0ee5eeaad",
+  "persistent" : true,
+  "insertionIndex" : 17
+}

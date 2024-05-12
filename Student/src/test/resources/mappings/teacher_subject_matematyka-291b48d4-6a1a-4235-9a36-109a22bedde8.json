@@ -1,0 +1,20 @@
+{
+  "id" : "291b48d4-6a1a-4235-9a36-109a22bedde8",
+  "name" : "teacher_subject_matematyka",
+  "request" : {
+    "url" : "/teacher/subject/Matematyka",
+    "method" : "GET"
+  },
+  "response" : {
+    "status" : 200,
+    "body" : "{\"firstName\":\"ŁukaszSenior\",\"lastName\":\"Bąk\",\"age\":40,\"email\":\"ww@wp.pl\",\"subject\":[\"Matematyka\",\"Informatyka\"]}",
+    "headers" : {
+      "Keep-Alive" : "timeout=60",
+      "Date" : "Sun, 12 May 2024 09:46:45 GMT",
+      "Content-Type" : "application/json"
+    }
+  },
+  "uuid" : "291b48d4-6a1a-4235-9a36-109a22bedde8",
+  "persistent" : true,
+  "insertionIndex" : 13
+}

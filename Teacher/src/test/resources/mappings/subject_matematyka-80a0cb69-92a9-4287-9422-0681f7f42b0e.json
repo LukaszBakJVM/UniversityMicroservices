@@ -1,0 +1,20 @@
+{
+  "id" : "80a0cb69-92a9-4287-9422-0681f7f42b0e",
+  "name" : "subject_matematyka",
+  "request" : {
+    "url" : "/subject/Matematyka",
+    "method" : "GET"
+  },
+  "response" : {
+    "status" : 200,
+    "body" : "{\"subject\":\"Matematyka\"}",
+    "headers" : {
+      "Keep-Alive" : "timeout=60",
+      "Date" : "Sun, 12 May 2024 09:55:01 GMT",
+      "Content-Type" : "application/json"
+    }
+  },
+  "uuid" : "80a0cb69-92a9-4287-9422-0681f7f42b0e",
+  "persistent" : true,
+  "insertionIndex" : 7
+}

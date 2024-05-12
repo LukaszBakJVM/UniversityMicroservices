@@ -1,0 +1,20 @@
+{
+  "id" : "83ee39d2-98fc-4916-a762-1e5fd395fe0f",
+  "name" : "course_subject_mechanika",
+  "request" : {
+    "url" : "/course/subject/Mechanika",
+    "method" : "GET"
+  },
+  "response" : {
+    "status" : 200,
+    "body" : "{\"course\":[\"Informatyczny\"]}",
+    "headers" : {
+      "Keep-Alive" : "timeout=60",
+      "Date" : "Sun, 12 May 2024 10:04:10 GMT",
+      "Content-Type" : "application/json"
+    }
+  },
+  "uuid" : "83ee39d2-98fc-4916-a762-1e5fd395fe0f",
+  "persistent" : true,
+  "insertionIndex" : 23
+}

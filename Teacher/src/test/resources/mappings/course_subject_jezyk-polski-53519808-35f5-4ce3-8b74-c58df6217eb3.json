@@ -1,0 +1,20 @@
+{
+  "id" : "53519808-35f5-4ce3-8b74-c58df6217eb3",
+  "name" : "course_subject_jezyk-polski",
+  "request" : {
+    "url" : "/course/subject/Jezyk%20Polski",
+    "method" : "GET"
+  },
+  "response" : {
+    "status" : 200,
+    "body" : "{\"course\":[\"Humanistyczny\"]}",
+    "headers" : {
+      "Keep-Alive" : "timeout=60",
+      "Date" : "Sun, 12 May 2024 10:04:42 GMT",
+      "Content-Type" : "application/json"
+    }
+  },
+  "uuid" : "53519808-35f5-4ce3-8b74-c58df6217eb3",
+  "persistent" : true,
+  "insertionIndex" : 21
+}

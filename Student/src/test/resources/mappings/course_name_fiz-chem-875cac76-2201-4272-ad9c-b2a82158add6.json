@@ -1,0 +1,20 @@
+{
+  "id" : "875cac76-2201-4272-ad9c-b2a82158add6",
+  "name" : "course_name_fiz-chem",
+  "request" : {
+    "url" : "/course/name/Fiz-Chem",
+    "method" : "GET"
+  },
+  "response" : {
+    "status" : 200,
+    "body" : "{\"course\":\"Fiz-Chem\",\"subject\":[\"Chemia\",\"Fizyka\",\"Matematyka\"]}",
+    "headers" : {
+      "Keep-Alive" : "timeout=60",
+      "Date" : "Sun, 12 May 2024 09:37:43 GMT",
+      "Content-Type" : "application/json"
+    }
+  },
+  "uuid" : "875cac76-2201-4272-ad9c-b2a82158add6",
+  "persistent" : true,
+  "insertionIndex" : 3
+}

@@ -1,0 +1,20 @@
+{
+  "id" : "28021b9c-296e-40ba-b5eb-78d1e5133fb4",
+  "name" : "subject_jezyka-angielski",
+  "request" : {
+    "url" : "/subject/Jezyka%20Angielski",
+    "method" : "GET"
+  },
+  "response" : {
+    "status" : 200,
+    "body" : "{\"subject\":\"Jezyka Angielski\"}",
+    "headers" : {
+      "Keep-Alive" : "timeout=60",
+      "Date" : "Sun, 12 May 2024 09:55:55 GMT",
+      "Content-Type" : "application/json"
+    }
+  },
+  "uuid" : "28021b9c-296e-40ba-b5eb-78d1e5133fb4",
+  "persistent" : true,
+  "insertionIndex" : 3
+}

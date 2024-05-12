@@ -1,0 +1,20 @@
+{
+  "id" : "5c1ccc41-05af-4366-8f4a-283a8c3b7934",
+  "name" : "course_subject_chemia",
+  "request" : {
+    "url" : "/course/subject/Chemia",
+    "method" : "GET"
+  },
+  "response" : {
+    "status" : 200,
+    "body" : "{\"course\":[\"Fiz-Chem\"]}",
+    "headers" : {
+      "Keep-Alive" : "timeout=60",
+      "Date" : "Sun, 12 May 2024 10:04:57 GMT",
+      "Content-Type" : "application/json"
+    }
+  },
+  "uuid" : "5c1ccc41-05af-4366-8f4a-283a8c3b7934",
+  "persistent" : true,
+  "insertionIndex" : 19
+}

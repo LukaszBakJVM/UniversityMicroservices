@@ -1,0 +1,20 @@
+{
+  "id" : "10c9ca9b-88a5-4bbc-9767-eb2e4c376dbe",
+  "name" : "course_subject_matematyka",
+  "request" : {
+    "url" : "/course/subject/Matematyka",
+    "method" : "GET"
+  },
+  "response" : {
+    "status" : 200,
+    "body" : "{\"course\":[\"Fiz-Chem\",\"Humanistyczny\",\"Informatyczny\"]}",
+    "headers" : {
+      "Keep-Alive" : "timeout=60",
+      "Date" : "Sun, 12 May 2024 10:04:31 GMT",
+      "Content-Type" : "application/json"
+    }
+  },
+  "uuid" : "10c9ca9b-88a5-4bbc-9767-eb2e4c376dbe",
+  "persistent" : true,
+  "insertionIndex" : 22
+}

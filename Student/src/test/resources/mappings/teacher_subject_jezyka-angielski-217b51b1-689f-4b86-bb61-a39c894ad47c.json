@@ -1,0 +1,20 @@
+{
+  "id" : "217b51b1-689f-4b86-bb61-a39c894ad47c",
+  "name" : "teacher_subject_jezyka-angielski",
+  "request" : {
+    "url" : "/teacher/subject/Jezyka%20Angielski",
+    "method" : "GET"
+  },
+  "response" : {
+    "status" : 200,
+    "body" : "{\"firstName\":\"RobertSenior\",\"lastName\":\"Bąk\",\"age\":19,\"email\":\"robert@wp.pl\",\"subject\":[\"Jezyk Polski\",\"Jezyka Angielski\"]}",
+    "headers" : {
+      "Keep-Alive" : "timeout=60",
+      "Date" : "Sun, 12 May 2024 09:47:41 GMT",
+      "Content-Type" : "application/json"
+    }
+  },
+  "uuid" : "217b51b1-689f-4b86-bb61-a39c894ad47c",
+  "persistent" : true,
+  "insertionIndex" : 9
+}

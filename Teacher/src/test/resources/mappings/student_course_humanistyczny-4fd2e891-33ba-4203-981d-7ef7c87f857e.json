@@ -1,0 +1,20 @@
+{
+  "id" : "4fd2e891-33ba-4203-981d-7ef7c87f857e",
+  "name" : "student_course_humanistyczny",
+  "request" : {
+    "url" : "/student/course/Humanistyczny",
+    "method" : "GET"
+  },
+  "response" : {
+    "status" : 200,
+    "body" : "{\"students\":[{\"firstname\":\"Dawid\",\"lastname\":\"Bąk\"},{\"firstname\":\"Dawidaaa\",\"lastname\":\"Bąk\"}]}",
+    "headers" : {
+      "Keep-Alive" : "timeout=60",
+      "Date" : "Sun, 12 May 2024 10:12:30 GMT",
+      "Content-Type" : "application/json"
+    }
+  },
+  "uuid" : "4fd2e891-33ba-4203-981d-7ef7c87f857e",
+  "persistent" : true,
+  "insertionIndex" : 28
+}

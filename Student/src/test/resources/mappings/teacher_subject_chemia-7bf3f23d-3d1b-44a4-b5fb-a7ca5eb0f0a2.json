@@ -1,0 +1,20 @@
+{
+  "id" : "7bf3f23d-3d1b-44a4-b5fb-a7ca5eb0f0a2",
+  "name" : "teacher_subject_chemia",
+  "request" : {
+    "url" : "/teacher/subject/Chemia",
+    "method" : "GET"
+  },
+  "response" : {
+    "status" : 200,
+    "body" : "{\"firstName\":\"DawidSenior\",\"lastName\":\"Bąk\",\"age\":20,\"email\":\"dawid@wp.pl\",\"subject\":[\"Fizyka\",\"Chemia\",\"Mechanika\"]}",
+    "headers" : {
+      "Keep-Alive" : "timeout=60",
+      "Date" : "Sun, 12 May 2024 09:47:25 GMT",
+      "Content-Type" : "application/json"
+    }
+  },
+  "uuid" : "7bf3f23d-3d1b-44a4-b5fb-a7ca5eb0f0a2",
+  "persistent" : true,
+  "insertionIndex" : 10
+}

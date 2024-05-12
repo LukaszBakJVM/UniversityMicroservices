@@ -1,0 +1,20 @@
+{
+  "id" : "d37121d7-4588-41c4-8f39-c88bbf170c7d",
+  "name" : "course_name_humanistyczny",
+  "request" : {
+    "url" : "/course/name/Humanistyczny",
+    "method" : "GET"
+  },
+  "response" : {
+    "status" : 200,
+    "body" : "{\"course\":\"Humanistyczny\",\"subject\":[\"Jezyk Polski\",\"Jezyka Angielski\",\"Matematyka\"]}",
+    "headers" : {
+      "Keep-Alive" : "timeout=60",
+      "Date" : "Sun, 12 May 2024 09:37:20 GMT",
+      "Content-Type" : "application/json"
+    }
+  },
+  "uuid" : "d37121d7-4588-41c4-8f39-c88bbf170c7d",
+  "persistent" : true,
+  "insertionIndex" : 4
+}

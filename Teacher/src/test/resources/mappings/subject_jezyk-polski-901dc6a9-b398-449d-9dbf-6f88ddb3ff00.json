@@ -1,0 +1,20 @@
+{
+  "id" : "901dc6a9-b398-449d-9dbf-6f88ddb3ff00",
+  "name" : "subject_jezyk-polski",
+  "request" : {
+    "url" : "/subject/Jezyk%20Polski",
+    "method" : "GET"
+  },
+  "response" : {
+    "status" : 200,
+    "body" : "{\"subject\":\"Jezyk Polski\"}",
+    "headers" : {
+      "Keep-Alive" : "timeout=60",
+      "Date" : "Sun, 12 May 2024 09:55:13 GMT",
+      "Content-Type" : "application/json"
+    }
+  },
+  "uuid" : "901dc6a9-b398-449d-9dbf-6f88ddb3ff00",
+  "persistent" : true,
+  "insertionIndex" : 6
+}

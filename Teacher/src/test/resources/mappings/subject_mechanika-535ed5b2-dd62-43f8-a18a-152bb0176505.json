@@ -1,0 +1,20 @@
+{
+  "id" : "535ed5b2-dd62-43f8-a18a-152bb0176505",
+  "name" : "subject_mechanika",
+  "request" : {
+    "url" : "/subject/Mechanika",
+    "method" : "GET"
+  },
+  "response" : {
+    "status" : 200,
+    "body" : "{\"subject\":\"Mechanika\"}",
+    "headers" : {
+      "Keep-Alive" : "timeout=60",
+      "Date" : "Sun, 12 May 2024 09:56:15 GMT",
+      "Content-Type" : "application/json"
+    }
+  },
+  "uuid" : "535ed5b2-dd62-43f8-a18a-152bb0176505",
+  "persistent" : true,
+  "insertionIndex" : 2
+}

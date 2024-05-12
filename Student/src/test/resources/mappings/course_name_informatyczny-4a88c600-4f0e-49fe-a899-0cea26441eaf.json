@@ -1,0 +1,20 @@
+{
+  "id" : "4a88c600-4f0e-49fe-a899-0cea26441eaf",
+  "name" : "course_name_informatyczny",
+  "request" : {
+    "url" : "/course/name/Informatyczny",
+    "method" : "GET"
+  },
+  "response" : {
+    "status" : 200,
+    "body" : "{\"course\":\"Informatyczny\",\"subject\":[\"Matematyka\",\"Informatyka\",\"Matematyka\"]}",
+    "headers" : {
+      "Keep-Alive" : "timeout=60",
+      "Date" : "Sun, 12 May 2024 09:38:00 GMT",
+      "Content-Type" : "application/json"
+    }
+  },
+  "uuid" : "4a88c600-4f0e-49fe-a899-0cea26441eaf",
+  "persistent" : true,
+  "insertionIndex" : 2
+}

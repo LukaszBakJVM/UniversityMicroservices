@@ -2,6 +2,7 @@ package org.example.subject;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWebTestClient;
@@ -41,22 +42,46 @@ class UniversitySubjectApplicationTests {
         registry.add("spring.datasource.password", mysql::getPassword);
     }
 
+    @BeforeEach
+    void cleanDatabase() {
+        subjectRepository.deleteAll();
+    }
+
     @Test
-    void save() {
+    void addNewSubjectTest() {
         String response = "{\"subject\":\"Matematyka\"}";
-
-
 
         SubjectDto subjectdto = new SubjectDto("Matematyka");
 
+        webTestClient.post().uri("/subject/add").contentType(MediaType.APPLICATION_JSON).bodyValue(subjectdto).exchange().expectStatus().isOk().expectBody().json(response); //
 
-        webTestClient.post()
-                .uri("/subject/add")
-                .contentType(MediaType.APPLICATION_JSON)
-                .bodyValue(subjectdto)
-                .exchange()
-                .expectStatus().isOk().expectBody().json(response); //
+    }
 
+    @Test
+    void findSubjectByName() {
+        String response = "{\"subject\":\"Informatyka\"}";
+        setupSubjects();
+        String subjectName = "Informatyka";
+        webTestClient.get().uri("subject/{subject}", subjectName).accept(MediaType.APPLICATION_JSON).exchange().expectStatus().isOk().expectBody().json(response);
+
+    }
+
+    @Test
+    void findAllSubjects() {
+        String response = "[{\"subject\":\"Informatyka\"},{\"subject\":\"Mechanika\"}]";
+
+        setupSubjects();
+        webTestClient.get().uri("subject").accept(MediaType.APPLICATION_JSON).exchange().expectStatus().isOk().expectBody().json(response);
+
+    }
+
+    void setupSubjects() {
+        UniversitySubject informatyka = new UniversitySubject();
+        informatyka.setSubject("Informatyka");
+        subjectRepository.save(informatyka);
+        UniversitySubject mechanika = new UniversitySubject();
+        mechanika.setSubject("Mechanika");
+        subjectRepository.save(mechanika);
     }
 
 

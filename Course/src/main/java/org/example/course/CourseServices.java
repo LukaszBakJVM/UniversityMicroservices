@@ -13,14 +13,16 @@ public class CourseServices {
 
     private final CourseRepository repository;
     private final CourseMapper courseMapper;
-    private final WebClient.Builder webClientBuilder;
-    @Value("${course}")
-    private String courseUrl;
+    private final WebClient webClient;
+    @Value("${baseUrl}")
+    private String baseUrl;
 
-    public CourseServices(CourseRepository repository, CourseMapper courseMapper, WebClient.Builder webClientBuilder, ReactorLoadBalancerExchangeFilterFunction lbFunction) {
+
+    public CourseServices(CourseRepository repository, CourseMapper courseMapper, ReactorLoadBalancerExchangeFilterFunction lbFunction, WebClient.Builder webClient) {
         this.repository = repository;
         this.courseMapper = courseMapper;
-        this.webClientBuilder = webClientBuilder.filter(lbFunction);
+        this.webClient = webClient.filter(lbFunction).build();
+
     }
 
     CourseDto newCourse(CourseDto dto) {
@@ -31,8 +33,9 @@ public class CourseServices {
 
 
     private List<String> listCourse(List<String> subject) {
+        System.out.println(baseUrl+subject);
         return subject.stream()
-                .map(c -> webClientBuilder.baseUrl(courseUrl).build().get().uri(c).retrieve().bodyToMono(Subject.class).map(Subject::subject).block())
+                .map(c -> webClient.get().uri(baseUrl+"/subject/{subject}",c).retrieve().bodyToMono(Subject.class).map(Subject::subject).block())
                 .toList();
     }
 

@@ -1,6 +1,7 @@
 package org.example.course;
 
 import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
 import java.util.List;
@@ -15,5 +16,7 @@ public interface CourseRepository extends PagingAndSortingRepository<UniversityC
     List<UniversityCourse> findAll(Sort sort);
     List<UniversityCourse>findBySubjectName(String subjectName);
     void deleteAll();
+    @Query("SELECT COUNT(u) FROM UniversityCourse u")
+    long countAll();
 
 }

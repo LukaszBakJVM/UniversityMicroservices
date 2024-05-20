@@ -62,13 +62,12 @@ class CourseApplicationTests {
     @Test
     void createNewCourse() {
 
-
-        String s = """
-                {
-                  "course": "Nazwa kursu",
-                  "subject": ["Matematyka","Jezyk Polski"]
-                }""";
-        webTestClient.post().uri("/course").contentType(MediaType.APPLICATION_JSON).bodyValue(s).exchange().expectStatus().isOk();
+        String request = """
+                { "course": "Nazwa kursu", "subject": ["Matematyka","Jezyk Polski"]}""";
+                
+        String response = "{\"course\":\"Nazwa kursu\",\"subject\":[\"Matematyka\",\"Jezyk Polski\"]}";
+        webTestClient.post().uri("/course").contentType(MediaType.APPLICATION_JSON).bodyValue(request).exchange().expectStatus().isOk().expectBody()
+                .json(response);
         long countCourse = courseRepository.countAll();
 
         assertEquals(1, countCourse);

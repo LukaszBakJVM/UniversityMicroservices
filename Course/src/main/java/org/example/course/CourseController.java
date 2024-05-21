@@ -1,5 +1,7 @@
 package org.example.course;
 
+
+
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,12 +21,12 @@ public class CourseController {
     }
 
     @GetMapping("/{id}")
-    CourseDto findById(@PathVariable long id) {
+    CourseDto findById(@PathVariable("id") long id) {
         return services.findById(id);
     }
 
     @GetMapping("/name/{name}")
-    CourseDto findByName(@PathVariable String name) {
+    CourseDto findByName(@PathVariable("name") String name) {
         return services.findByCourse(name);
     }
 

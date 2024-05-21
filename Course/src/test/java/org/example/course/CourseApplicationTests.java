@@ -18,6 +18,8 @@ import org.springframework.test.context.DynamicPropertySource;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import org.testcontainers.containers.MySQLContainer;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -64,13 +66,25 @@ class CourseApplicationTests {
 
         String request = """
                 { "course": "Nazwa kursu", "subject": ["Matematyka","Jezyk Polski"]}""";
-                
+
         String response = "{\"course\":\"Nazwa kursu\",\"subject\":[\"Matematyka\",\"Jezyk Polski\"]}";
-        webTestClient.post().uri("/course").contentType(MediaType.APPLICATION_JSON).bodyValue(request).exchange().expectStatus().isOk().expectBody()
-                .json(response);
+        webTestClient.post().uri("/course").contentType(MediaType.APPLICATION_JSON).bodyValue(request).exchange().expectStatus().isOk().expectBody().json(response);
         long countCourse = courseRepository.countAll();
 
         assertEquals(1, countCourse);
 
+    }
+
+    @Test
+    void findCourseByName() {
+        String response = "{\"course\":\"newCourse\",\"subject\":[\"Matematyka\",\"Jezyk Polski\"]}";
+        String courseName = "newCourse";
+        UniversityCourse course = new UniversityCourse();
+        course.setCourse(courseName);
+        List<String> subject = List.of("Matematyka", "Jezyk Polski");
+        course.setSubjectName(subject);
+        courseRepository.save(course);
+
+        webTestClient.get().uri("/course/name/{name}", courseName).exchange().expectStatus().isOk().expectBody().json(response);
     }
 }

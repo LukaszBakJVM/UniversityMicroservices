@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWebTestClient;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
+import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
@@ -16,6 +17,7 @@ import org.springframework.test.web.reactive.server.WebTestClient;
 import org.testcontainers.containers.MySQLContainer;
 
 import static com.github.tomakehurst.wiremock.core.WireMockConfiguration.wireMockConfig;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureWebTestClient
@@ -36,7 +38,8 @@ class StudentApplicationTests {
         registry.add("spring.datasource.url", mysql::getJdbcUrl);
         registry.add("spring.datasource.username", mysql::getUsername);
         registry.add("spring.datasource.password", mysql::getPassword);
-        registry.add("baseUrl", wireMockServer::baseUrl);
+        registry.add("teacher", wireMockServer::baseUrl);
+        registry.add("course",wireMockServer::baseUrl);
 
 
     }
@@ -51,7 +54,19 @@ class StudentApplicationTests {
     }
 
     @Test
-    void contextLoads() {
+    void createNewStudentWithCourse() {
+        String request = """
+            {
+            "firstName":"Łukasz",
+                    "lastName":"Bąk",
+                    "age":22,
+                    "email":"rrr@w.pl",
+                    "course":"Fiz-Chem"}""";
+
+        webTestClient.post().uri("/student").contentType(MediaType.APPLICATION_JSON).bodyValue(request).exchange().expectStatus().isOk();
+        long countStudent = studentRepository.countAll();
+
+        assertEquals(1, countStudent);
     }
 
  /*   @Test

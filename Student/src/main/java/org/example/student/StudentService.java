@@ -1,7 +1,7 @@
 package org.example.student;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.cloud.client.loadbalancer.reactive.ReactorLoadBalancerExchangeFilterFunction;
+
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Flux;
@@ -21,10 +21,10 @@ public class StudentService {
     private final WebClient.Builder webClientBuilder;
 
 
-    public StudentService(StudentRepository studentRepository, StudentMapper studentMapper, WebClient.Builder webClientBuilder, ReactorLoadBalancerExchangeFilterFunction lbFunction) {
+    public StudentService(StudentRepository studentRepository, StudentMapper studentMapper, WebClient.Builder webClientBuilder) {
         this.studentRepository = studentRepository;
         this.studentMapper = studentMapper;
-        this.webClientBuilder = webClientBuilder.filter(lbFunction);
+        this.webClientBuilder = webClientBuilder;
     }
 
     StudentDto addStudent(StudentDto dto) {

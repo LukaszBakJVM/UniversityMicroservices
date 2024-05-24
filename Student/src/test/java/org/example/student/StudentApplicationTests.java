@@ -73,6 +73,8 @@ class StudentApplicationTests {
 
     @Test
     void findTeacherByStudent() {
+        String response = """
+        [ {"firstName": "ŁukaszSenior","lastName": "Bąk"},{"firstName": "DawidSenior","lastName": "Bąk"}]""";
         Student student = new Student();
         student.setFirstName("Lukasz");
         student.setLastName("Bak");
@@ -82,7 +84,8 @@ class StudentApplicationTests {
         studentRepository.save(student);
         String firstname = "Lukasz";
         String lastname = "Bak";
-        webTestClient.get().uri(uriBuilder -> uriBuilder.path("/student/teacher").queryParam("firstname", firstname).queryParam("lastname", lastname).build()).exchange().expectStatus().isOk();
+        webTestClient.get().uri(uriBuilder -> uriBuilder.path("/student/teacher").queryParam("firstname", firstname).queryParam("lastname", lastname).build()).exchange().expectStatus().isOk()
+                .expectBody().json(response);
     }
 
 }

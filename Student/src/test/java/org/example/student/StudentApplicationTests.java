@@ -83,15 +83,15 @@ class StudentApplicationTests {
                 .expectBody().json(response);
     }
     @Test
-    void findCourseByStudent(){
+    void findStudentsByCourse(){
         creteStudent();
-        String firstname = "Lukasz";
-        String lastname = "Bak";
-
-        webTestClient.get().uri(uriBuilder -> uriBuilder.path("/student").queryParam("firstname",firstname)
-                .queryParam("lastname",lastname).build()).exchange()
-                .expectStatus().isOk().expectBody(String.class).isEqualTo("Fiz-Chem");
+        String courseName = "Fiz-Chem";
+        String response = """
+                {"students": [{"firstname": "Lukasz","lastname": "Bak" }]}""";
+        webTestClient.get().uri("/student/course/{course}",courseName).accept(MediaType.APPLICATION_JSON).exchange()
+                .expectStatus().isOk().expectBody().json(response);
     }
+
     void creteStudent(){
         Student student = new Student();
         student.setFirstName("Lukasz");
@@ -102,5 +102,6 @@ class StudentApplicationTests {
         studentRepository.save(student);
 
     }
+
 
 }

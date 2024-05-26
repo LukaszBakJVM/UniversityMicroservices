@@ -42,7 +42,7 @@ public class StudentService {
 
     }
 
-    String findByFirstnameAndLastname(String firstName, String lastName) {
+  private   String findByFirstnameAndLastname(String firstName, String lastName) {
         return studentRepository.findByFirstNameAndLastName(firstName, lastName).map(Student::getCourse).orElseThrow();
 
     }

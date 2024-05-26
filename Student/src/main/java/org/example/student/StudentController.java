@@ -19,10 +19,10 @@ public class StudentController {
         return studentService.addStudent(dto);
     }
 
-    @GetMapping
+  /*  @GetMapping
     String findStudent(@RequestParam String firstname, @RequestParam String lastname) {
         return studentService.findByFirstnameAndLastname(firstname, lastname);
-    }
+    }*/
 
     @GetMapping("/teacher")
     Mono<List<Teacher>> findTeachersByStudent(@RequestParam String firstname, @RequestParam String lastname) {

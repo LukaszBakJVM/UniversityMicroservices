@@ -73,8 +73,26 @@ class StudentApplicationTests {
 
     @Test
     void findTeacherByStudent() {
+        creteStudent();
         String response = """
         [ {"firstName": "ŁukaszSenior","lastName": "Bąk"},{"firstName": "DawidSenior","lastName": "Bąk"}]""";
+
+        String firstname = "Lukasz";
+        String lastname = "Bak";
+        webTestClient.get().uri(uriBuilder -> uriBuilder.path("/student/teacher").queryParam("firstname", firstname).queryParam("lastname", lastname).build()).exchange().expectStatus().isOk()
+                .expectBody().json(response);
+    }
+    @Test
+    void findCourseByStudent(){
+        creteStudent();
+        String firstname = "Lukasz";
+        String lastname = "Bak";
+
+        webTestClient.get().uri(uriBuilder -> uriBuilder.path("/student").queryParam("firstname",firstname)
+                .queryParam("lastname",lastname).build()).exchange()
+                .expectStatus().isOk().expectBody(String.class).isEqualTo("Fiz-Chem");
+    }
+    void creteStudent(){
         Student student = new Student();
         student.setFirstName("Lukasz");
         student.setLastName("Bak");
@@ -82,10 +100,7 @@ class StudentApplicationTests {
         student.setEmail("www@wp.pl");
         student.setCourse("Fiz-Chem");
         studentRepository.save(student);
-        String firstname = "Lukasz";
-        String lastname = "Bak";
-        webTestClient.get().uri(uriBuilder -> uriBuilder.path("/student/teacher").queryParam("firstname", firstname).queryParam("lastname", lastname).build()).exchange().expectStatus().isOk()
-                .expectBody().json(response);
+
     }
 
 }

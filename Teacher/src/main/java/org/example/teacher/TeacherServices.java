@@ -37,7 +37,7 @@ public class TeacherServices {
 
 
     private List<String> listSubject(List<String> course) {
-        return course.stream().map(c -> webClientBuilder.baseUrl(subjectUrl).build().get().uri(c).retrieve().bodyToMono(Subject.class).map(Subject::subject).block()).toList();
+        return course.stream().map(c -> webClientBuilder.baseUrl(subjectUrl+"/subject/").build().get().uri(c).retrieve().bodyToMono(Subject.class).map(Subject::subject).block()).toList();
 
     }
 
@@ -56,9 +56,9 @@ public class TeacherServices {
     }
 
     Mono<List<StudentsList>> findStudentByTeacher(String firstName, String lastName) {
-        Mono<Set<String>> coursesMono = teacherRepository.findTeachersByFirstNameAndLastName(firstName, lastName).map(Teacher::getSubjectName).map(subjectNames -> Flux.fromIterable(subjectNames).flatMap(subject -> webClientBuilder.build().get().uri(courseUrl + subject).retrieve().bodyToMono(Course.class)).flatMap(c -> Flux.fromIterable(c.course())).collect(Collectors.toSet())).orElseThrow();
+        Mono<Set<String>> coursesMono = teacherRepository.findTeachersByFirstNameAndLastName(firstName, lastName).map(Teacher::getSubjectName).map(subjectNames -> Flux.fromIterable(subjectNames).flatMap(subject -> webClientBuilder.build().get().uri(courseUrl+"/course/subject/" + subject).retrieve().bodyToMono(Course.class)).flatMap(c -> Flux.fromIterable(c.course())).collect(Collectors.toSet())).orElseThrow();
         Flux<String> coursesFlux = coursesMono.flatMapMany(Flux::fromIterable);
-        Flux<StudentsList> studentsFlux = coursesFlux.flatMap(c -> webClientBuilder.build().get().uri(studentUrl + c).retrieve().bodyToMono(StudentsList.class));
+        Flux<StudentsList> studentsFlux = coursesFlux.flatMap(c -> webClientBuilder.build().get().uri(studentUrl+"/student/course/" + c).retrieve().bodyToMono(StudentsList.class));
         return studentsFlux.collectList();
     }
 }

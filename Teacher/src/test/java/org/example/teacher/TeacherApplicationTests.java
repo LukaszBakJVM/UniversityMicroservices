@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWebTestClient;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
+import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
@@ -17,6 +18,7 @@ import org.springframework.test.web.reactive.server.WebTestClient;
 import org.testcontainers.containers.MySQLContainer;
 
 import static com.github.tomakehurst.wiremock.core.WireMockConfiguration.wireMockConfig;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureWebTestClient
@@ -60,7 +62,12 @@ class TeacherApplicationTests {
 
 
     @Test
-    void contextLoads() {
+    void addNewTeacherWithSubjects() {
+        String request = """
+               {"firstName":"Łukasz","lastName":"Bąk","age":22,"email":"rrr@w.pl","subject":["Matematyka","Informatyka"]}""";
+        webTestClient.post().uri("/teacher").contentType(MediaType.APPLICATION_JSON).bodyValue(request).exchange().expectStatus().isOk();
+        long countTeacher = teacherRepository.countAll();
+        assertEquals(1,countTeacher);
     }
 
 

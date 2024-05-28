@@ -17,6 +17,8 @@ import org.springframework.test.context.DynamicPropertySource;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import org.testcontainers.containers.MySQLContainer;
 
+import java.util.List;
+
 import static com.github.tomakehurst.wiremock.core.WireMockConfiguration.wireMockConfig;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -68,6 +70,24 @@ class TeacherApplicationTests {
         webTestClient.post().uri("/teacher").contentType(MediaType.APPLICATION_JSON).bodyValue(request).exchange().expectStatus().isOk();
         long countTeacher = teacherRepository.countAll();
         assertEquals(1,countTeacher);
+    }
+    @Test
+    void findTeacherBySubject(){
+        saveTeacher();
+        String subject = "Matematyka";
+        webTestClient.get().uri("/teacher/subject/{subject}",subject).exchange().expectStatus().isOk();
+
+    }
+    void saveTeacher(){
+        List<String> subject = List.of("Matematyka", "Informatyka");
+        Teacher teacher = new Teacher();
+        teacher.setFirstName("Lukasz");
+        teacher.setLastName("Bak");
+        teacher.setAge(42);
+        teacher.setEmail("www@wp.pl");
+        teacher.setSubjectName(subject);
+        teacherRepository.save(teacher);
+
     }
 
 

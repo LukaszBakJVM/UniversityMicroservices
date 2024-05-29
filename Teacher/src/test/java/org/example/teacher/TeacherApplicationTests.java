@@ -78,6 +78,15 @@ class TeacherApplicationTests {
         webTestClient.get().uri("/teacher/subject/{subject}",subject).exchange().expectStatus().isOk();
 
     }
+    @Test
+    void findStudentByTeacher(){
+        String firstname = "Lukasz";
+        String lastname = "Bak";
+        saveTeacher();
+        webTestClient.get().uri(uriBuilder -> uriBuilder.path("/teacher/student").queryParam("firstname",firstname).queryParam("lastname",lastname).build())
+                .exchange().expectStatus().isOk();
+
+    }
     void saveTeacher(){
         List<String> subject = List.of("Matematyka", "Informatyka");
         Teacher teacher = new Teacher();

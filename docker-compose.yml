@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  course:
+    build:
+      context: ./Course
+      dockerfile: Dockerfile
+    ports:
+      - "8081:8081"
+
+
+  student:
+    build:
+      context: ./Student
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+
+
+  subject:
+    build:
+      context: ./Subject
+      dockerfile: Dockerfile
+    ports:
+      - "8082:8082"
+
+
+  teacher:
+    build:
+      context: ./Teacher
+      dockerfile: Dockerfile
+    ports:
+      - "8083:8083"
+   # environment:
+     # - SPRING_PROFILES_ACTIVE=prod

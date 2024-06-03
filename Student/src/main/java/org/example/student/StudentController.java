@@ -38,4 +38,8 @@ public class StudentController {
         studentService.deleteById(id);
         return ResponseEntity.noContent().build();
     }
+    @GetMapping
+    StudentDto findStudentByFirstAndLastname(@RequestParam String firstname, @RequestParam String lastname){
+        return  studentService.findStudentByFirstAndLastName(firstname,lastname);
+    }
 }

@@ -35,7 +35,6 @@ public class StudentService {
     }
 
     private String course(String course) {
-
         return webClientBuilder.baseUrl(courseUrl).build().get().uri("/course/name/{course}", course).retrieve().bodyToMono(Course.class).map(Course::course).flux().blockFirst();
 
 
@@ -59,6 +58,10 @@ public class StudentService {
     }
     void deleteById(long id){
         studentRepository.deleteById(id);
+    }
+    StudentDto findStudentByFirstAndLastName(String firstName, String lastName){
+        Student student = studentRepository.findByFirstNameAndLastName(firstName, lastName).orElseThrow();
+        return studentMapper.entityToDto(student);
     }
 
 }

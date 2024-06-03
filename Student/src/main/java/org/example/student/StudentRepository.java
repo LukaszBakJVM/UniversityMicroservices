@@ -13,6 +13,8 @@ public interface StudentRepository extends PagingAndSortingRepository<Student,Lo
     @Query("SELECT COUNT(u) FROM Student u")
     long countAll();
     void deleteAll();
+    void deleteByFirstNameAndLastName(String firstName,String lastName);
+    void deleteById(long id);
 
 
 

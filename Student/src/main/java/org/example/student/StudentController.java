@@ -1,5 +1,6 @@
 package org.example.student;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 
@@ -19,10 +20,7 @@ public class StudentController {
         return studentService.addStudent(dto);
     }
 
-  /*  @GetMapping
-    String findStudent(@RequestParam String firstname, @RequestParam String lastname) {
-        return studentService.findByFirstnameAndLastname(firstname, lastname);
-    }*/
+
 
     @GetMapping("/teacher")
     Mono<List<Teacher>> findTeachersByStudent(@RequestParam String firstname, @RequestParam String lastname) {
@@ -32,5 +30,12 @@ public class StudentController {
     @GetMapping("/course/{course}")
     FindStudentByCourse findStudentsByCourse(@PathVariable String course) {
         return studentService.findStudentByCourse(course);
+    }
+
+
+    @DeleteMapping("/{id}")
+    ResponseEntity<?>deleteById(@PathVariable long id){
+        studentService.deleteById(id);
+        return ResponseEntity.noContent().build();
     }
 }

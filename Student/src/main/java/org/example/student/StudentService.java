@@ -1,7 +1,6 @@
 package org.example.student;
 
 import org.springframework.beans.factory.annotation.Value;
-
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Flux;
@@ -12,13 +11,13 @@ import java.util.List;
 
 @Service
 public class StudentService {
-    @Value("${course}")
-    private  String courseUrl;
-    @Value("${teacher}")
-    private   String teacherUrl;
     private final StudentRepository studentRepository;
     private final StudentMapper studentMapper;
     private final WebClient.Builder webClientBuilder;
+    @Value("${course}")
+    private String courseUrl;
+    @Value("${teacher}")
+    private String teacherUrl;
 
 
     public StudentService(StudentRepository studentRepository, StudentMapper studentMapper, WebClient.Builder webClientBuilder) {
@@ -42,16 +41,13 @@ public class StudentService {
 
     }
 
-  private   String findByFirstnameAndLastname(String firstName, String lastName) {
+    private String findByFirstnameAndLastname(String firstName, String lastName) {
         return studentRepository.findByFirstNameAndLastName(firstName, lastName).map(Student::getCourse).orElseThrow();
 
     }
 
     Mono<List<Teacher>> findTeachersByStudent(String firstName, String lastName) {
-
-
         String curseName = findByFirstnameAndLastname(firstName, lastName);
-
         return webClientBuilder.baseUrl(courseUrl).build().get().uri("/course/name/{curseName}", curseName).retrieve().bodyToMono(Subject.class).map(Subject::subject).flatMapMany(Flux::fromIterable).flatMap(subject -> webClientBuilder.baseUrl(teacherUrl).build().get().uri("/teacher/subject/{subject}", subject).retrieve().bodyToMono(Teacher.class)).distinct().collectList();
 
     }
@@ -60,8 +56,9 @@ public class StudentService {
     FindStudentByCourse findStudentByCourse(String course) {
         List<Student> byCourse = studentRepository.findByCourse(course);
         return studentMapper.findStudentByCourse(byCourse);
-
-
+    }
+    void deleteById(long id){
+        studentRepository.deleteById(id);
     }
 
 }

@@ -57,17 +57,18 @@ public class StudentController {
     }
     @PatchMapping("/{id}")
     ResponseEntity<StudentDto> changData(@PathVariable Long id, @RequestBody JsonMergePatch patch){
+        StudentDto student;
         try {
             StudentDto studentById = studentService.findStudentById(id);
             StudentDto studentDto = applyPatch(studentById, patch);
-             studentService.changeData(studentDto);
+            student = studentService.changeData(studentDto, id);
 
         } catch (JsonPatchException | JsonProcessingException e) {
             return ResponseEntity.internalServerError().build();
         } catch (NoSuchElementException e) {
             return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok().body(student);
     }
 
 

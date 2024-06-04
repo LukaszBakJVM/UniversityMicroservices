@@ -32,8 +32,10 @@ public class StudentService {
         return studentMapper.entityToDto(save);
 
     }
-    StudentDto changeData(StudentDto dto){
+    StudentDto changeData(StudentDto dto,long id){
         Student student = studentMapper.dtoToEntity(dto, course(dto.course()));
+        student.setId(id);
+
         Student save = studentRepository.save(student);
         return studentMapper.entityToDto(save);
     }

@@ -31,7 +31,11 @@ public class StudentService {
         Student save = studentRepository.save(student);
         return studentMapper.entityToDto(save);
 
-
+    }
+    StudentDto changeData(StudentDto dto){
+        Student student = studentMapper.dtoToEntity(dto, course(dto.course()));
+        Student save = studentRepository.save(student);
+        return studentMapper.entityToDto(save);
     }
 
     private String course(String course) {
@@ -63,5 +67,12 @@ public class StudentService {
         Student student = studentRepository.findByFirstNameAndLastName(firstName, lastName).orElseThrow();
         return studentMapper.entityToDto(student);
     }
+    List<StudentDto>findAll(){
+        return studentRepository.findAll().stream().map(studentMapper::entityToDto).toList();
+    }
+    StudentDto findStudentById(long id){
+        return studentRepository.findById(id).map(studentMapper::entityToDto).orElseThrow();
+    }
+
 
 }

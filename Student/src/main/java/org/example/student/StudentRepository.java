@@ -9,7 +9,9 @@ import java.util.Optional;
 public interface StudentRepository extends PagingAndSortingRepository<Student,Long> {
     Optional<Student>findByFirstNameAndLastName(String firstName,String lastName);
     Student save(Student student);
+    Optional<Student>findById(long id);
     List<Student>findByCourse(String course);
+    List<Student>findAll();
     @Query("SELECT COUNT(u) FROM Student u")
     long countAll();
     void deleteAll();

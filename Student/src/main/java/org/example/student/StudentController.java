@@ -30,7 +30,6 @@ public class StudentController {
     }
 
 
-
     @GetMapping("/teacher")
     Mono<List<Teacher>> findTeachersByStudent(@RequestParam String firstname, @RequestParam String lastname) {
         return studentService.findTeachersByStudent(firstname, lastname);
@@ -43,20 +42,23 @@ public class StudentController {
 
 
     @DeleteMapping("/{id}")
-    ResponseEntity<?>deleteById(@PathVariable long id){
+    ResponseEntity<?> deleteById(@PathVariable long id) {
         studentService.deleteById(id);
         return ResponseEntity.noContent().build();
     }
+
     @GetMapping("/search")
-    StudentDto findStudentByFirstAndLastname(@RequestParam String firstname, @RequestParam String lastname){
-        return  studentService.findStudentByFirstAndLastName(firstname,lastname);
+    StudentDto findStudentByFirstAndLastname(@RequestParam String firstname, @RequestParam String lastname) {
+        return studentService.findStudentByFirstAndLastName(firstname, lastname);
     }
+
     @GetMapping
-    List<StudentDto>findAllStudents(){
+    List<StudentDto> findAllStudents() {
         return studentService.findAll();
     }
+
     @PatchMapping("/{id}")
-    ResponseEntity<StudentDto> changData(@PathVariable Long id, @RequestBody JsonMergePatch patch){
+    ResponseEntity<StudentDto> changData(@PathVariable Long id, @RequestBody JsonMergePatch patch) {
         StudentDto student;
         try {
             StudentDto studentById = studentService.findStudentById(id);

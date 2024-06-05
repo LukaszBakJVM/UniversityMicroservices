@@ -26,6 +26,13 @@ public class CourseServices {
         UniversityCourse save = repository.save(course);
         return courseMapper.entityToDto(save);
     }
+    CourseDto changeData(CourseDto dto,long id){
+        UniversityCourse universityCourse = courseMapper.dtoToEntity(dto, listCourse(dto.subject()));
+        universityCourse.setId(id);
+        UniversityCourse save = repository.save(universityCourse);
+        return courseMapper.entityToDto(save);
+
+    }
 
 
     private List<String> listCourse(List<String> subject) {

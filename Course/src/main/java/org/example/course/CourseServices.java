@@ -60,4 +60,7 @@ public class CourseServices {
         return courseMapper.findStudentByTeacherDto(bySubjectName);
 
     }
+    void deleteById(long id){
+        repository.deleteById(id);
+    }
 }

@@ -12,4 +12,5 @@ public interface TeacherRepository extends JpaRepository<Teacher, Long> {
     Optional<Teacher>findTeachersByFirstNameAndLastName(String firstName, String lastName);
     @Query("SELECT COUNT(u) FROM Teacher u")
     long countAll();
+    void  deleteById(long id);
 }

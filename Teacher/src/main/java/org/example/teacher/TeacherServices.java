@@ -1,7 +1,9 @@
 package org.example.teacher;
 
+import jakarta.validation.ConstraintViolation;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -15,6 +17,7 @@ public class TeacherServices {
     private final TeacherRepository teacherRepository;
     private final TeacherMapper teacherMapper;
     private final WebClient.Builder webClientBuilder;
+    private final LocalValidatorFactoryBean validation;
     @Value("${subject}")
     private String subjectUrl;
     @Value("${course}")
@@ -22,15 +25,25 @@ public class TeacherServices {
     @Value("${student}")
     private String studentUrl;
 
-    public TeacherServices(TeacherRepository teacherRepository, TeacherMapper teacherMapper, WebClient.Builder webClientBuilder) {
+    public TeacherServices(TeacherRepository teacherRepository, TeacherMapper teacherMapper, WebClient.Builder webClientBuilder, LocalValidatorFactoryBean validation) {
 
         this.teacherRepository = teacherRepository;
         this.teacherMapper = teacherMapper;
         this.webClientBuilder = webClientBuilder;
+
+        this.validation = validation;
     }
 
     TeacherDto newTeacher(TeacherDto dto) {
         Teacher teacher = teacherMapper.dtoToEntity(dto, listSubject(dto.subject()));
+        validationTeacher(teacher);
+        Teacher save = teacherRepository.save(teacher);
+        return teacherMapper.entityToDto(save);
+    }
+    TeacherDto changeData(TeacherDto dto,long id){
+        Teacher teacher = teacherMapper.dtoToEntity(dto, listSubject(dto.subject()));
+        validationTeacher(teacher);
+        teacher.setId(id);
         Teacher save = teacherRepository.save(teacher);
         return teacherMapper.entityToDto(save);
     }
@@ -60,5 +73,20 @@ public class TeacherServices {
         Flux<String> coursesFlux = coursesMono.flatMapMany(Flux::fromIterable);
         Flux<StudentsList> studentsFlux = coursesFlux.flatMap(c -> webClientBuilder.build().get().uri(studentUrl+"/student/course/" + c).retrieve().bodyToMono(StudentsList.class));
         return studentsFlux.collectList();
+    }
+    void  deleteById(long id){
+        teacherRepository.deleteById(id);
+    }
+    private void validationTeacher(Teacher teacher) {
+        Set<ConstraintViolation<Teacher>> violations = validation.validate(teacher);
+        if (!violations.isEmpty()) {
+            StringBuilder errorMessage = new StringBuilder("Validation error occurred: ");
+            for (ConstraintViolation<Teacher> violation : violations) {
+                errorMessage.append(violation.getMessage()).append("; ");
+            }
+
+            throw new Validation(errorMessage.toString());
+
+        }
     }
 }

@@ -18,5 +18,6 @@ public interface CourseRepository extends PagingAndSortingRepository<UniversityC
     void deleteAll();
     @Query("SELECT COUNT(u) FROM UniversityCourse u")
     long countAll();
+    void deleteById(long id);
 
 }

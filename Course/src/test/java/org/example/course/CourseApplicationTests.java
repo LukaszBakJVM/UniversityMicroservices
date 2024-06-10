@@ -76,6 +76,20 @@ class CourseApplicationTests {
     }
 
     @Test
+    void updateCourse() {
+        String request = """
+                { "course": "Nazwa kursu"}""";
+        String response = "{\"course\":\"Nazwa kursu\",\"subject\":[\"Matematyka\",\"Jezyk Polski\"]}";
+        course();
+        webTestClient.patch().uri("/course/1").contentType(MediaType.APPLICATION_JSON).bodyValue(request).exchange().expectStatus().isOk().expectBody().json(response);
+
+        long countCourse = courseRepository.countAll();
+
+        assertEquals(1, countCourse);
+
+    }
+
+    @Test
     void findCourseByName() {
         String response = "{\"course\":\"newCourse\",\"subject\":[\"Matematyka\",\"Jezyk Polski\"]}";
         String courseName = "newCourse";
@@ -86,5 +100,13 @@ class CourseApplicationTests {
         courseRepository.save(course);
 
         webTestClient.get().uri("/course/name/{name}", courseName).exchange().expectStatus().isOk().expectBody().json(response);
+    }
+
+    void course() {
+        List<String> subject = List.of("Matematyka", "Jezyk Polski");
+        UniversityCourse course = new UniversityCourse();
+        course.setCourse("update");
+        course.setSubjectName(subject);
+        courseRepository.save(course);
     }
 }

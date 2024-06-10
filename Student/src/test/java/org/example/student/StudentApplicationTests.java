@@ -71,6 +71,7 @@ class StudentApplicationTests {
         assertEquals(1, countStudent);
     }
 
+
     @Test
     void findTeacherByStudent() {
         creteStudent();

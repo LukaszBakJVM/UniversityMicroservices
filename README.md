@@ -1,11 +1,11 @@
-Utworzyć dwie klasy: Student oraz Nauczyciel. Nauczyciel może mieć wiele studentów oraz student może mieć wiele nauczycieli.
-Nauczyciel powinien mieć pola: imię, nazwisko, wiek, email oraz przedmiot.
-Student powinien mieć pola: imię, nazwisko, wiek, email oraz kierunek.
+Create two classes: Student and Teacher. A teacher can have many students and a student can have many teachers. The teacher should have the following fields: name, surname, age, email and subject. The student should have the following fields: name, surname, age, email and field of study.
 
+Requirements:
 
-Wymagania:
-1. Obie klasy można tworzyć, usuwać i edytować. Dane powinny być walidowane: poprawny email, imię dłuższe od dwóch liter, wiek > 18.
-2. Powinna być możliwość przypisania nauczyciela do studenta oraz usunięcie nauczyciela studentowi jak i na odwrót.
-3. Powinna być możliwość wyświetlenia wszystkich studentów oraz wszystkich nauczycieli (dwa endpointy).
-4. Dane można filtrować: wyszukać wszystkich studentów danego nauczyciela i odwrotnie.
-5. Studentów oraz nauczycieli można wyszukiwać po imieniu i nazwisku.
+Both classes can be created, deleted and edited. Data should be validated: correct email address, name longer than two letters, age > 18.
+It should be possible to assign a teacher to a student and remove a teacher from a student and vice versa.
+It should be possible to display all students and all teachers (two endpoints).
+The data can be filtered: search for all students of a given teacher and vice versa.
+Students and teachers can be searched by name and surname.
+
+To run  docker-compose up
